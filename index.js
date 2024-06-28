@@ -26,6 +26,7 @@ async function run() {
     await client.connect();
 
     const serverCollection = client.db("carDoctor").collection("services");
+    const bookingCollection = client.db("carDoctor").collection("booking");
 
     app.get("/services", async (req, res) => {
       const cursor = serverCollection.find();
@@ -44,6 +45,10 @@ async function run() {
       const result = await serverCollection.findOne(query,options);
       res.send(result);
     });
+    //booking 
+    app.post("/booking", async(req,res) =>{
+      const booking = req.body
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
