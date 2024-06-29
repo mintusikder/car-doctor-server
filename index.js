@@ -39,16 +39,19 @@ async function run() {
       const query = { _id: new ObjectId(id) };
 
       const options = {
-        projection: { title: 1, price: 1,service_id:1 },
+        projection: { title: 1, price: 1, service_id: 1 },
       };
 
-      const result = await serverCollection.findOne(query,options);
+      const result = await serverCollection.findOne(query, options);
       res.send(result);
     });
-    //booking 
-    app.post("/booking", async(req,res) =>{
-      const booking = req.body
-    })
+    //booking
+    app.post("/booking", async (req, res) => {
+      const booking = req.body;
+      console.log(booking);
+      const result = await bookingCollection.insertOne(booking);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
